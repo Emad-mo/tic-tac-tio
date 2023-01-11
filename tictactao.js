@@ -14,7 +14,7 @@ let winnerCamp = [
 function winner() {
 
     winnerCamp.forEach((itme, indx, array) => {
-        if (itme.every(value => x.includes(value)) && o.length >= 3) {
+        if (itme.every(value => o.includes(value)) && o.length >= 3) {
             statusText.textContent = ` The winner is O`
             console.log(JSON.stringify(itme.sort()))
         }

@@ -3,7 +3,7 @@ let gameContainer = document.getElementsByClassName("gameContainer"),
     statusText = document.getElementById("statusText"),
     restartBtn = document.getElementById("restartBtn")
 const cells = document.querySelectorAll(".cell")
-statusText.innerHTML = `X's Turn دور X`
+statusText.innerHTML = `X's Turn`
 let x = []
 let o = []
 let winnerCamp = [
@@ -14,13 +14,15 @@ let winnerCamp = [
 function winner() {
 
     winnerCamp.forEach((itme, indx, array) => {
-        if (JSON.stringify(o.sort()) === JSON.stringify(itme.sort())) {
-            statusText.textContent = ` The winner is O 
-            الفائز هو O`
+        if (itme.every(value => x.includes(value)) && o.length >= 3) {
+            statusText.textContent = ` The winner is O`
+            console.log(JSON.stringify(itme.sort()))
         }
-        if (JSON.stringify(x.sort()) === JSON.stringify(itme.sort())) {
-            statusText.textContent = ` The winner is X 
-            الفائز هو X`
+        if (itme.every(value => x.includes(value)) && x.length >= 3) {
+            statusText.textContent = ` The winner is X`
+            console.log(itme.some(value => x.includes(value)))
+            console.log(itme, x)
+
 
         }
     })
@@ -36,18 +38,18 @@ cellContainer.onclick = function (e) {
 
 }
 function playerX(e) {
-    if (e.target.textContent == "" && statusText.textContent == `X's Turn دور X`) {
+    if (e.target.textContent == "" && statusText.textContent == `X's Turn`) {
         e.target.textContent = "X"
-        statusText.textContent = "O's Turn دور O"
+        statusText.textContent = "O's Turn"
         x.push(e.target.getAttribute("cellIndex"))
 
     }
     console.log(x)
 }
 function playerO(e) {
-    if (e.target.textContent == "" && statusText.textContent == "O's Turn دور O") {
+    if (e.target.textContent == "" && statusText.textContent == "O's Turn") {
         e.target.textContent = "O"
-        statusText.innerHTML = `X's Turn دور X`
+        statusText.innerHTML = `X's Turn`
         o.push(e.target.getAttribute("cellIndex"))
     }
     console.log(o)
@@ -59,5 +61,5 @@ restartBtn.onclick = function () {
     });
     x = []
     o = []
-    statusText.textContent = `X's Turn دور X`
+    statusText.textContent = `X's Turn`
 }
